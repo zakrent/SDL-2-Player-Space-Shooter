@@ -5,6 +5,7 @@
 #include <vector>
 #include "Body.h"
 #include "Planet.h"
+#include "Player.h"
 #include "Renderer.h"
 #include "misc/Vector2D.h"
 

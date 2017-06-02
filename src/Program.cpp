@@ -3,11 +3,15 @@
 Program::Program(){
 	bodies.push_back(new Planet(Vector2D(300,150),Vector2D(0,0),10,1000,&bodies));
 	bodies.back()->isStatic = true;
-	bodies.push_back(new Planet(Vector2D(400,150),Vector2D(0,-0.7),2,1,&bodies));
+	bodies.push_back(new Player(Vector2D(400,150),Vector2D(0,-0.7),4,1,&bodies));
 }
 
 
 Program::~Program(){
+    for(int i = 0; i < bodies.size(); ++i){
+        delete bodies[i];
+        bodies.erase(bodies.begin()+i);
+    }
 	SDL_Quit();
 }
 
