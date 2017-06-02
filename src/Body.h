@@ -9,20 +9,21 @@
 #include <cmath>
 
 class Body{
-private:
+protected:
 	Vector2D position;
 	Vector2D lastPos;
 	Vector2D velocity;
+	void updatePhysics();
 public:
 	bool isStatic;
 	uint32 radius, mass;
-	std::vector<Body>* bodies;
+	std::vector<Body*>* bodies;
 
 	Vector2D getPos();
-	void update();
-	std::vector<RenderInstruction> getRenderInstructions();
+	virtual void update() {};
+	virtual std::vector<RenderInstruction> getRenderInstructions() {};
 
-	Body(Vector2D _position, Vector2D _velocity, uint32 _radius, uint32 _mass, std::vector<Body>* _bodies);
+	Body(Vector2D _position, Vector2D _velocity, uint32 _radius, uint32 _mass, std::vector<Body*>* _bodies);
 };
 
 #endif

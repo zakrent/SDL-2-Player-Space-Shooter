@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <vector>
 #include "Body.h"
+#include "Planet.h"
 #include "Renderer.h"
 #include "misc/Vector2D.h"
 
@@ -12,7 +13,7 @@ private:
 	const int MIN_UPDATE_TIME = 10;
 	int lastUpdate;
 	Renderer mainRenderer;
-	std::vector<Body> bodies;
+	std::vector<Body*> bodies;
 public:
 	void startMainLoop(); 
 

@@ -1,10 +1,9 @@
 #include "Program.h"
 
 Program::Program(){
-	bodies.push_back(Body(Vector2D(300,150),Vector2D(0,0),1,1000,&bodies));
-	bodies.back().isStatic = true;
-	bodies.push_back(Body(Vector2D(400,150),Vector2D(0,-1),1,1,&bodies));
-	bodies.push_back(Body(Vector2D(360,150),Vector2D(0,-1),1,1,&bodies));
+	bodies.push_back(new Planet(Vector2D(300,150),Vector2D(0,0),10,1000,&bodies));
+	bodies.back()->isStatic = true;
+	bodies.push_back(new Planet(Vector2D(400,150),Vector2D(0,-0.7),2,1,&bodies));
 }
 
 
@@ -20,9 +19,9 @@ void Program::startMainLoop(){
 		
 		renderInstructions.clear();
 
-		for(Body &body : bodies){
-			body.update();
-			for(RenderInstruction instruction : body.getRenderInstructions()){
+		for(Body* body : bodies){
+			body->update();
+			for(RenderInstruction instruction : body->getRenderInstructions()){
 				renderInstructions.push_back(instruction);
 			}
 		}
