@@ -3,11 +3,10 @@
 #include <math.h>
 
 Player::Player(Vector2D _position, Vector2D _velocity, uint32 _radius, uint32 _mass, std::vector<Body*>* _bodies) :
-	Body(_position, _velocity, _radius, _mass, _bodies), rotation(0) {};
+	Body(_position, _velocity, _radius, _mass, _bodies), maxAcceleration(0.008), rotation(0){ };
 
 void Player::update(){
 	Body::updatePhysics();
-	rotation = (rotation+1)%360;
 }
 
 std::vector<RenderInstruction> Player::getRenderInstructions(){

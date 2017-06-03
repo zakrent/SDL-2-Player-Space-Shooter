@@ -7,13 +7,15 @@
 #include "Planet.h"
 #include "Player.h"
 #include "Renderer.h"
+#include "Control.h"
 #include "misc/Vector2D.h"
 
 class Program {
 private:
-	const int MIN_UPDATE_TIME = 10;
+	const int MIN_UPDATE_TIME = 15;
 	int lastUpdate;
 	Renderer mainRenderer;
+    Control controller;
 	std::vector<Body*> bodies;
 public:
 	void startMainLoop(); 

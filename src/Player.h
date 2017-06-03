@@ -6,6 +6,7 @@
 
 class Player : public Body{
 public:
+	double maxAcceleration;
 	int rotation;
 	void update();
 	std::vector<RenderInstruction> getRenderInstructions();

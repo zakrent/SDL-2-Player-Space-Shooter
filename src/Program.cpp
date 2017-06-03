@@ -1,9 +1,13 @@
 #include "Program.h"
 
 Program::Program(){
-	bodies.push_back(new Planet(Vector2D(300,150),Vector2D(0,0),10,1000,&bodies));
+	bodies.push_back(new Planet(Vector2D(600,300),Vector2D(0,0),5,500,&bodies));
 	bodies.back()->isStatic = true;
-	bodies.push_back(new Player(Vector2D(400,150),Vector2D(0,-0.7),4,1,&bodies));
+    bodies.push_back(new Planet(Vector2D(500,300),Vector2D(0,0.6),2,50,&bodies));
+    bodies.push_back(new Planet(Vector2D(400,300),Vector2D(0,0.5),2,100,&bodies));
+	Player* tempPl = new Player(Vector2D(700,300),Vector2D(0,-0.5),2,0.1,&bodies);
+	controller.controlerPlayer = tempPl;
+	bodies.push_back(tempPl);
 }
 
 
@@ -22,6 +26,8 @@ void Program::startMainLoop(){
 	while(running){
 		
 		renderInstructions.clear();
+
+        controller.update();
 
 		for(Body* body : bodies){
 			body->update();

@@ -12,11 +12,11 @@ class Body{
 protected:
 	Vector2D position;
 	Vector2D lastPos;
-	Vector2D velocity;
 	void updatePhysics();
 public:
+	Vector2D velocity;
 	bool isStatic;
-	uint32 radius, mass;
+	double radius, mass;
 	std::vector<Body*>* bodies;
 
 	Vector2D getPos();

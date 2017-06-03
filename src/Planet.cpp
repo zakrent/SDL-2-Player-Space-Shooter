@@ -18,9 +18,9 @@ std::vector<RenderInstruction> Planet::getRenderInstructions(){
 		currentPos.x = position.x + (cos(i*M_PI/180) * radius);
 		currentPos.y = position.y + (sin(i*M_PI/180) * radius);
 		currentInstr.endPos = currentPos;
-		currentInstr.colG = mass % 255;
+		currentInstr.colG = int(mass)/10 % 255;
 		currentInstr.colB = 255;
-		currentInstr.colR = mass % 255;
+		currentInstr.colR = int(mass)/10 % 255;
 		instructions.push_back(currentInstr);
 	}
     return instructions;
