@@ -1,9 +1,11 @@
 #include "Body.h"
 #include <stdlib.h>
+#include "misc/Physics.h"
 
 Body::Body(Vector2D _position, Vector2D _velocity, uint32 _radius, uint32 _mass, std::vector<Body*>* _bodies)
 : radius(_radius), mass(_mass), position(_position), velocity(_velocity), bodies(_bodies), lastPos(_position) {
 	isStatic = false;
+	shouldBeDestroyed = false;
 }
 
 void Body::updatePhysics(){
@@ -19,6 +21,8 @@ void Body::updatePhysics(){
 			gravVec.normalize();
 			gravVec *= calculateGravitationalAcceleration(distance, body->mass);
 			velocity += gravVec*0.01;
+			if(checkForBodyCollision(*this, *body) && mass < body->mass)
+				shouldBeDestroyed = true;
 		}
 		position += velocity*0.01;
 	}

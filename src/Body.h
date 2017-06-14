@@ -5,7 +5,6 @@
 #include "misc/Types.h"
 #include "misc/Vector2D.h"
 #include "misc/RenderInstruction.h"
-#include "misc/Physics.h"
 #include <cmath>
 
 class Body{
@@ -14,6 +13,7 @@ protected:
 	Vector2D lastPos;
 	void updatePhysics();
 public:
+	bool shouldBeDestroyed;
 	Vector2D velocity;
 	bool isStatic;
 	double radius, mass;

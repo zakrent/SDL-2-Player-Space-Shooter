@@ -6,6 +6,8 @@
 void Control::update() {
 	if (!controlerPlayer)
 		return;
+	if(controlerPlayer->shouldBeDestroyed)
+		controlerPlayer = NULL;
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	bool accelererate = (state[SDL_SCANCODE_W] && controlScheme == 0) || 
 		(state[SDL_SCANCODE_UP] && controlScheme == 1); 
