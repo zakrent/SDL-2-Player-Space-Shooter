@@ -2,7 +2,7 @@
 #include "misc/Vector2D.h"
 #include <math.h>
 
-Planet::Planet(Vector2D _position, Vector2D _velocity, uint32 _radius, uint32 _mass, std::vector<Body*>* _bodies) :
+Planet::Planet(Vector2D _position, Vector2D _velocity, double _radius, double _mass, std::vector<Body*>* _bodies) :
         Body(_position, _velocity, _radius, _mass, _bodies) {};
 
 void Planet::update(){

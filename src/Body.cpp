@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "misc/Physics.h"
 
-Body::Body(Vector2D _position, Vector2D _velocity, uint32 _radius, uint32 _mass, std::vector<Body*>* _bodies)
+Body::Body(Vector2D _position, Vector2D _velocity, double _radius, double _mass, std::vector<Body*>* _bodies)
 : radius(_radius), mass(_mass), position(_position), velocity(_velocity), bodies(_bodies), lastPos(_position) {
 	isStatic = false;
 	shouldBeDestroyed = false;

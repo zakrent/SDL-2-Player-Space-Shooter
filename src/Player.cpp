@@ -2,7 +2,7 @@
 #include "misc/Vector2D.h"
 #include <math.h>
 
-Player::Player(Vector2D _position, Vector2D _velocity, uint32 _radius, uint32 _mass, std::vector<Body*>* _bodies) :
+Player::Player(Vector2D _position, Vector2D _velocity, double _radius, double _mass, std::vector<Body*>* _bodies) :
 	Body(_position, _velocity, _radius, _mass, _bodies), maxAcceleration(0.008), rotation(0){ };
 
 void Player::update(){

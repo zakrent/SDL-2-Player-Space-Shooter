@@ -8,7 +8,7 @@ public:
 	void update();
 	std::vector<RenderInstruction> getRenderInstructions();
 
-	Planet( Vector2D _position, Vector2D _velocity, uint32 _radius, uint32 _mass, std::vector<Body*>* _bodies );
+	Planet( Vector2D _position, Vector2D _velocity, double _radius, double _mass, std::vector<Body*>* _bodies );
 	~Planet() {};
 };	
 

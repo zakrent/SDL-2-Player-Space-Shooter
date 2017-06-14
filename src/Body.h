@@ -23,7 +23,7 @@ public:
 	virtual void update() {};
 	virtual std::vector<RenderInstruction> getRenderInstructions() {};
 
-	Body(Vector2D _position, Vector2D _velocity, uint32 _radius, uint32 _mass, std::vector<Body*>* _bodies);
+	Body(Vector2D _position, Vector2D _velocity, double _radius, double _mass, std::vector<Body*>* _bodies);
 };
 
 #endif
