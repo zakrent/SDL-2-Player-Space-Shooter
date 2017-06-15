@@ -5,10 +5,10 @@ Program::Program() : controller1(0), controller2(1){
 	bodies.back()->isStatic = true;
 	bodies.push_back(new Planet(Vector2D(500,300),Vector2D(0,0.6),2,50,&bodies));
 	bodies.push_back(new Planet(Vector2D(400,300),Vector2D(0,0.5),3,100,&bodies));
-	Player* tempP1 = new Player(Vector2D(200,300),Vector2D(0,0.5),2,0.0001,&bodies);
+	Player* tempP1 = new Player(Vector2D(200,300),Vector2D(0,0.5),2,0.0001,&bodies, true);
 	controller1.controlerPlayer = tempP1;
 	bodies.push_back(tempP1);
-	Player* tempP2 = new Player(Vector2D(1000,300),Vector2D(0,-0.5),2,0.0001,&bodies);
+	Player* tempP2 = new Player(Vector2D(1000,300),Vector2D(0,-0.5),2,0.0001,&bodies, false);
 	controller2.controlerPlayer = tempP2;
 	bodies.push_back(tempP2);
 }
