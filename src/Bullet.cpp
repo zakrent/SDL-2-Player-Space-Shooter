@@ -2,7 +2,8 @@
 
 Bullet::Bullet(Vector2D _position, Vector2D _velocity, double _radius, double _mass, std::vector<Body*>* _bodies, bool isInRedTeam) :
 	Body(_position, _velocity, _radius, _mass, _bodies) { 
-		life = 100;
+		life = 250;
+		this->isGravitySource = false;
 		this->isInRedTeam = isInRedTeam;
 	};
 

@@ -6,6 +6,7 @@ Body::Body(Vector2D _position, Vector2D _velocity, double _radius, double _mass,
 : radius(_radius), mass(_mass), position(_position), velocity(_velocity), bodies(_bodies), lastPos(_position) {
 	isStatic = false;
 	shouldBeDestroyed = false;
+	isGravitySource = true;
 }
 
 void Body::updatePhysics(){
@@ -14,17 +15,19 @@ void Body::updatePhysics(){
 		return;
 	for(int i = 0; i < 100; i++){
 		for(Body* body : *bodies) {
-			if (body->getPos() == position)
+			if (body->getPos() == position || !body->isGravitySource)
 				continue;
 			long double distance = sqrt(pow(position.x - body->getPos().x, 2.0) + pow(position.y - body->getPos().y, 2.0));
 			Vector2D gravVec = (body->getPos() - position);
 			gravVec.normalize();
 			gravVec *= calculateGravitationalAcceleration(distance, body->mass);
 			velocity += gravVec*0.01;
-			if(checkForBodyCollision(*this, *body) && mass < body->mass)
-				shouldBeDestroyed = true;
 		}
 		position += velocity*0.01;
+	}
+	for(Body* body: *bodies){
+		if(checkForBodyCollision(*this, *body) && mass < body->mass)
+			shouldBeDestroyed = true;
 	}
 }
 

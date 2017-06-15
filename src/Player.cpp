@@ -5,11 +5,18 @@
 #include <SDL.h>
 
 Player::Player(Vector2D _position, Vector2D _velocity, double _radius, double _mass, std::vector<Body*>* _bodies, bool isInRedTeam) :
-	Body(_position, _velocity, _radius, _mass, _bodies), maxAcceleration(0.008), rotation(0), isInRedTeam(isInRedTeam){ 
-		lastShotTime = 0;	
+	Body(_position, _velocity, _radius, _mass, _bodies), maxAcceleration(0.006), rotation(0), isInRedTeam(isInRedTeam) { 
+		cannonHeat = 0;
+		cannonDelayActive = false;
 	};
 
 void Player::update(){
+	if(!cannonActive){
+		cannonHeat -= 0.2;
+		if(cannonHeat <= 0)
+			cannonActive = true;
+	}
+	cannonDelayActive = !cannonDelayActive;
 	Body::updatePhysics();
 }
 
@@ -28,17 +35,20 @@ std::vector<RenderInstruction> Player::getRenderInstructions(){
 }
 
 void Player::shoot(){
-	if (!SDL_TICKS_PASSED(SDL_GetTicks(), lastShotTime + 50)) {
+	if(cannonHeat > 20 || !cannonActive){
+		cannonActive = false;
 		return;
 	}
-	lastShotTime = SDL_GetTicks();
+	if(cannonDelayActive)
+		return;
+	cannonHeat += 2;
 	Vector2D bulVel(0,0); 
 	bulVel.x = cos(rotation * M_PI / 180);
 	bulVel.y = sin(rotation * M_PI / 180);
 	bulVel.normalize();
-	bulVel *= 4;
+	bulVel *= 3;
 	bulVel += velocity;
 	Vector2D bulPos = this->getPos();
-	bulPos += bulVel*2;
+	bulPos += bulVel*3;
 	bodies->push_back(new Bullet(bulPos, bulVel, 1, 0.0002, bodies, isInRedTeam)); 
 }

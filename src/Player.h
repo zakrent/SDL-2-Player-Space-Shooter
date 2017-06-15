@@ -6,7 +6,9 @@
 
 class Player : public Body{
 private:
-	uint32 lastShotTime;
+	float cannonHeat;
+	bool cannonActive;
+	bool cannonDelayActive;
 public:
 	bool isInRedTeam;
 	double maxAcceleration;

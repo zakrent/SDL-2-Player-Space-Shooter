@@ -1,16 +1,12 @@
 #include "Program.h"
 
 Program::Program() : controller1(0), controller2(1){
-	bodies.push_back(new Planet(Vector2D(600,300),Vector2D(0,0),5,500,&bodies));
+	bodies.push_back(new Planet(Vector2D(600,300),Vector2D(0,0),5,1800,&bodies));
 	bodies.back()->isStatic = true;
-	bodies.push_back(new Planet(Vector2D(500,300),Vector2D(0,0.6),2,50,&bodies));
-	bodies.push_back(new Planet(Vector2D(400,300),Vector2D(0,0.5),3,100,&bodies));
-	Player* tempP1 = new Player(Vector2D(200,300),Vector2D(0,0.5),2,0.0001,&bodies, true);
-	controller1.controlerPlayer = tempP1;
-	bodies.push_back(tempP1);
-	Player* tempP2 = new Player(Vector2D(1000,300),Vector2D(0,-0.5),2,0.0001,&bodies, false);
-	controller2.controlerPlayer = tempP2;
-	bodies.push_back(tempP2);
+	bodies.push_back(new Planet(Vector2D(500,300),Vector2D(0,1.0),2,50,&bodies));
+	bodies.push_back(new Planet(Vector2D(400,300),Vector2D(0,0.8),3,100,&bodies));
+	controller1.controlerPlayer = NULL;
+	controller2.controlerPlayer = NULL;
 }
 
 
@@ -32,7 +28,7 @@ void Program::startMainLoop(){
 
 		controller1.update();
 		controller2.update();
-
+			
 		for(int i = 0; i < bodies.size(); ++i){
 			Body* body = bodies[i];
 			if(body->shouldBeDestroyed){
@@ -52,6 +48,17 @@ void Program::startMainLoop(){
 			mainRenderer.drawInstruction(instruction);
 		}
 		mainRenderer.swapBuffers();
+
+		if(controller1.controlerPlayer == NULL){
+			Player* tempP1 = new Player(Vector2D(200,300),Vector2D(0,0.5),2,0.0001,&bodies, true);
+			controller1.controlerPlayer = tempP1;
+			bodies.push_back(tempP1);
+		}
+		if(controller2.controlerPlayer == NULL){
+			Player* tempP2 = new Player(Vector2D(1000,300),Vector2D(0,0.5),2,0.0001,&bodies, false);
+			controller2.controlerPlayer = tempP2;
+			bodies.push_back(tempP2);
+		}
 
 		SDL_Event event;	
 		while( SDL_PollEvent( &event) != 0 ) {

@@ -13,6 +13,7 @@ protected:
 	Vector2D lastPos;
 	void updatePhysics();
 public:
+	bool isGravitySource;
 	bool shouldBeDestroyed;
 	Vector2D velocity;
 	bool isStatic;
