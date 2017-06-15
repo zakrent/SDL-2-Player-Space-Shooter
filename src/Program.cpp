@@ -1,13 +1,16 @@
 #include "Program.h"
 
-Program::Program() : controller(0){
+Program::Program() : controller1(0), controller2(1){
 	bodies.push_back(new Planet(Vector2D(600,300),Vector2D(0,0),5,500,&bodies));
 	bodies.back()->isStatic = true;
 	bodies.push_back(new Planet(Vector2D(500,300),Vector2D(0,0.6),2,50,&bodies));
 	bodies.push_back(new Planet(Vector2D(400,300),Vector2D(0,0.5),3,100,&bodies));
-	Player* tempPl = new Player(Vector2D(700,300),Vector2D(0,-0.5),2,1,&bodies);
-	controller.controlerPlayer = tempPl;
-	bodies.push_back(tempPl);
+	Player* tempP1 = new Player(Vector2D(200,300),Vector2D(0,0.5),2,0.0001,&bodies);
+	controller1.controlerPlayer = tempP1;
+	bodies.push_back(tempP1);
+	Player* tempP2 = new Player(Vector2D(1000,300),Vector2D(0,-0.5),2,0.0001,&bodies);
+	controller2.controlerPlayer = tempP2;
+	bodies.push_back(tempP2);
 }
 
 
@@ -27,9 +30,9 @@ void Program::startMainLoop(){
 		
 		renderInstructions.clear();
 
-		controller.update();
+		controller1.update();
+		controller2.update();
 
-		
 		for(int i = 0; i < bodies.size(); ++i){
 			Body* body = bodies[i];
 			if(body->shouldBeDestroyed){

@@ -1,13 +1,16 @@
 #include "Control.h" 
 #include <math.h>
 #include "misc/Vector2D.h"
+#include "Bullet.h"
 #include <SDL.h>
 
 void Control::update() {
-	if (!controlerPlayer)
+	if (!controlerPlayer && controlerPlayer == NULL)
 		return;
-	if(controlerPlayer->shouldBeDestroyed)
+	if(controlerPlayer->shouldBeDestroyed) {
 		controlerPlayer = NULL;
+		return;
+	}
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	bool accelererate = (state[SDL_SCANCODE_W] && controlScheme == 0) || 
 		(state[SDL_SCANCODE_UP] && controlScheme == 1); 
@@ -17,6 +20,8 @@ void Control::update() {
 		(state[SDL_SCANCODE_LEFT] && controlScheme == 1); 
 	bool right = (state[SDL_SCANCODE_D] && controlScheme == 0) || 
 		(state[SDL_SCANCODE_RIGHT] && controlScheme == 1); 
+	bool shoot = (state[SDL_SCANCODE_SPACE] && controlScheme == 0) || 
+		(state[SDL_SCANCODE_RETURN] && controlScheme == 1); 
 	if (right)
 		controlerPlayer->rotation += 2;
 	if (left)
@@ -30,5 +35,9 @@ void Control::update() {
 		if (deccelerate)
 			velVect *= -1;
 		controlerPlayer->velocity += velVect;
+	}
+
+	if(shoot){
+		controlerPlayer->shoot();	
 	}
 }

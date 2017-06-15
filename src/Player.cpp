@@ -1,9 +1,13 @@
 #include "Player.h"
 #include "misc/Vector2D.h"
 #include <math.h>
+#include "Bullet.h"
+#include <SDL.h>
 
 Player::Player(Vector2D _position, Vector2D _velocity, double _radius, double _mass, std::vector<Body*>* _bodies) :
-	Body(_position, _velocity, _radius, _mass, _bodies), maxAcceleration(0.008), rotation(0){ };
+	Body(_position, _velocity, _radius, _mass, _bodies), maxAcceleration(0.008), rotation(0){ 
+		lastShotTime = 0;	
+	};
 
 void Player::update(){
 	Body::updatePhysics();
@@ -20,3 +24,18 @@ std::vector<RenderInstruction> Player::getRenderInstructions(){
 	return instructions;
 }
 
+void Player::shoot(){
+	if (!SDL_TICKS_PASSED(SDL_GetTicks(), lastShotTime + 50)) {
+		return;
+	}
+	lastShotTime = SDL_GetTicks();
+	Vector2D bulVel(0,0); 
+	bulVel.x = cos(rotation * M_PI / 180);
+	bulVel.y = sin(rotation * M_PI / 180);
+	bulVel.normalize();
+	bulVel *= 4;
+	bulVel += velocity;
+	Vector2D bulPos = this->getPos();
+	bulPos += bulVel*2;
+	bodies->push_back(new Bullet(bulPos, bulVel, 1, 0.0002, bodies)); 
+}

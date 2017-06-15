@@ -15,7 +15,8 @@ private:
 	const int MIN_UPDATE_TIME = 15;
 	int lastUpdate;
 	Renderer mainRenderer;
-    Control controller;
+	Control controller1;
+	Control controller2;
 	std::vector<Body*> bodies;
 public:
 	void startMainLoop(); 
