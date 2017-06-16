@@ -3,8 +3,8 @@
 Program::Program() : controller1(0), controller2(1){
 	bodies.push_back(new Planet(Vector2D(600,300),Vector2D(0,0),5,1800,&bodies));
 	bodies.back()->isStatic = true;
-	bodies.push_back(new Planet(Vector2D(500,300),Vector2D(0,1.0),2,50,&bodies));
-	bodies.push_back(new Planet(Vector2D(400,300),Vector2D(0,0.8),3,100,&bodies));
+	bodies.push_back(new Planet(Vector2D(900,300),Vector2D(0,-0.775),2,50,&bodies));
+	bodies.push_back(new Planet(Vector2D(500,300),Vector2D(0,1.34),3,100,&bodies));
 	controller1.controlerPlayer = NULL;
 	controller2.controlerPlayer = NULL;
 }
@@ -50,12 +50,12 @@ void Program::startMainLoop(){
 		mainRenderer.swapBuffers();
 
 		if(controller1.controlerPlayer == NULL){
-			Player* tempP1 = new Player(Vector2D(200,300),Vector2D(0,0.5),2,0.0001,&bodies, true);
+			Player* tempP1 = new Player(Vector2D(400,300),Vector2D(0,0.95),2,0.0001,&bodies, true);
 			controller1.controlerPlayer = tempP1;
 			bodies.push_back(tempP1);
 		}
 		if(controller2.controlerPlayer == NULL){
-			Player* tempP2 = new Player(Vector2D(1000,300),Vector2D(0,0.5),2,0.0001,&bodies, false);
+			Player* tempP2 = new Player(Vector2D(800,300),Vector2D(0,-0.95),2,0.0001,&bodies, false);
 			controller2.controlerPlayer = tempP2;
 			bodies.push_back(tempP2);
 		}
